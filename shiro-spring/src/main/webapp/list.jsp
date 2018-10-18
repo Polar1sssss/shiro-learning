@@ -25,8 +25,20 @@
 
 <body>
     <h1>List page</h1>
-    <a href="admin.jsp">Admin Page</a></br>
-    <a href="user.jsp">User Page</a></br>
+
+    Welcome: <shiro:principal></shiro:principal>
+    </br>
+
+    <!--根据不同的角色显示不同超链接-->
+    <shiro:hasRole name="admin">
+        <a href="admin.jsp">Admin Page</a></br>
+    </shiro:hasRole>
+    <shiro:hasRole name="user">
+        <a href="user.jsp">User Page</a></br>
+    </shiro:hasRole>
+
+    <a href="shiro/testShiroAnnoation">Test ShiroAnnoation</a>
+
     <a href="shiro/logout">Logout</a>
 </body>
 </html>

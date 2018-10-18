@@ -25,9 +25,10 @@
 </head>
 
 <body>
-    <form action="shiro/login" method="post">
+    <input action="shiro/login" method="post">
         username:<input type="text" name="username"/></br>
         password:<input type="password" name="pwd"/></br>
+        <input type="checkbox" value="记住我" name="remme"></br>
         <input type="submit" value="login"/>
     </form>
 </body>

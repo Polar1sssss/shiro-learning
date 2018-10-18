@@ -72,7 +72,7 @@ public class ShiroRealm extends AuthorizingRealm {
      *      用user用户登录只可以访问user.jsp
      */
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        // 1、从PrincipalCollection中获取未登录用户的信息
+        // 1、从PrincipalCollection中获取未登录用户的信息，如果不配置缓存，每次访问都会执行这行代码
         Object principal = principalCollection.getPrimaryPrincipal();
 
         // 2、利用登录的用户信息来获取当前用户的角色或权限

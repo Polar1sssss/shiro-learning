@@ -98,25 +98,40 @@
         <property name="loginUrl" value="/login.jsp"></property>
         <property name="successUrl" value="/success.jsp"></property>
         <property name="unauthorizedUrl" value="/unauthorized.jsp"></property>
+
+        <property name="filterChainDefinitionMap" ref="filterChainDefinitionMap"></property>
         <!--
             配置哪些页面需要受保护以及访问这些页面需要的权限
             1) anon：可以被匿名访问
             2) authc：必须认证即登录后才可以访问的页面
             3) logout：表示登出
-            4) roles：角色过滤器
+            4) roles：角色过滤器，具有对应的权限才可以访问的页面
+            5) user：认证和记住我可以访问该页面
         -->
-        <property name="filterChainDefinitions">
-            <!--url权限采取第一次匹配优先的方式-->
+        <!--<property name="filterChainDefinitions">
+            &lt;!&ndash;url权限采取第一次匹配优先的方式&ndash;&gt;
             <value>
                 /login.jsp = anon
                 /shiro/login.jsp = anon
                 /shiro/logout.jsp = logout
-
                 /user.jsp = roles[user]
                 /admin.jsp = roles[admin]
-
+                /list.jsp = user
                 /** = authc
             </value>
-        </property>
+        </property>-->
     </bean>
+
+    <!--配置一个bean，该bean实际上是一个map，通过实例工厂方法的方式注入-->
+    <bean id="filterChainDefinitionMap"
+        factory-bean="filterChainDefinitionMapBuilder"
+        factory-method="buildFilterChainDefination">
+
+    </bean>
+
+    <bean id="filterChainDefinitionMapBuilder" class="com.hujtb.shiro.factory.FilterChainDefinitionMapBuilder">
+
+    </bean>
+
+    <bean id="shiroService" class="com.hujtb.shiro.service.ShiroService"></bean>
 </beans>
